@@ -1,0 +1,123 @@
+.main-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+
+	width: 100%;
+
+	@include color(background, mint);
+
+	.container {
+		height: 10rem;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.logo {
+		width: 25rem;
+	}
+
+	.logo, .logo-mark {
+		/deep/ {
+			.text {
+				fill: white;
+			}
+
+			.mark {
+				@include color(fill, gold);
+			}
+		}
+	}
+
+	.nav-list {
+		display: flex;
+		align-items: center;
+	}
+
+	.nav-item {
+		margin-left: 3rem;
+
+		.nav-link {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0;
+
+			color: white;
+
+			font-weight: 600;
+			line-height: 1;
+
+			@include hover {
+				.text {
+					border-bottom-color: white;
+				}
+
+				.invoice-count {
+					background: white;
+				}
+			}
+
+			.text {
+				padding-top: 2px;
+				
+				border-bottom: 2px solid rgba(white, 0);
+
+				transition: border $transition;
+			}
+
+			.invoice-count {
+				transition: background $transition;
+			}
+		}
+
+		.invoice-count {
+			margin-left: 1rem;
+		}
+
+		.btn {
+			margin-left: 2rem;
+		}
+	}
+
+	.invoice-count {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 3rem;
+		width: 3rem;
+
+		border-radius: 50%;
+		background: rgba(white, 0.5);
+		@include color(color, midnight);
+
+		font-weight: 700;
+		font-size: 1.75rem;
+		line-height: 1.5;
+	}
+
+	@media screen and (max-width: 767px) {
+		.container {
+			height: 7.5rem;
+		}
+
+		.logo {
+			width: 4rem;
+		}
+
+		.btn {
+			margin-left: 0 !important;
+			padding: {
+				left: 2rem;
+				right: 2rem;
+			}
+
+			.text {
+				display: none;
+			}
+		}
+	}
+}

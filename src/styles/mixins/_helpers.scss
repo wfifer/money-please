@@ -1,0 +1,5 @@
+@mixin hover () {
+	.-show-hover &:hover, .-show-focus &:focus, .-hide-hover &:active {
+		@content;
+	}
+}

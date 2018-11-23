@@ -1,0 +1,70 @@
+.invoice-list {
+	.list-item {
+		padding: 2rem 0;
+
+		.item-info {
+			overflow: hidden;
+
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.item-amount {
+			font-weight: 700;
+		}
+
+		.input-group {
+			width: auto;
+		}
+
+		.btn {
+			min-width: 12.5rem;
+			
+			&:not(:first-child) {
+				margin-left: 1rem;
+			}
+		}
+
+		+ .list-item {
+			@include color-rgba(border-top, pinot, 0.2, 1px solid);
+		}
+
+		label {
+			padding-right: 1rem;
+			margin: 0;
+
+			font-weight: 600;
+		}
+
+		input {
+			flex: 1 1 auto;
+			max-width: 10rem;
+		}
+	}
+
+	@media screen and (max-width: 767px) {
+		.list-item {
+			.row {
+				> * {
+					&:not(:first-child) {
+						margin-top: 1rem;
+					}
+				}
+			}
+
+			.btn {
+				margin-top: 2rem;
+				min-width: 15rem;
+			}
+		}
+	}
+}
+
+.t-invoice-list-enter-active, .t-invoice-list-leave-active {
+	transition: all $transition;
+}
+
+.t-invoice-list-enter, .t-invoice-list-leave-to {
+	height: 0px;
+	opacity: 0;
+}

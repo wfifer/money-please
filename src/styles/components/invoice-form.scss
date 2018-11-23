@@ -1,0 +1,396 @@
+.invoice-form {
+	h2 {
+		font-size: 4rem;
+
+		+ * {
+			margin-top: 3rem;
+		}
+	}
+
+	.form-group {
+		&:not(:first-child) {
+			margin-top: 2rem;
+		}
+	}
+
+	.form-field {		
+		+ .form-field {
+			margin-top: 2rem;
+		}
+
+		&.row {
+			label {
+				padding-right: 2rem;
+			}
+		}
+
+		/deep/ {
+			label {
+				height: 5rem;
+
+				line-height: 5rem;
+				font-weight: 600;
+			}
+
+			.vdp-datepicker__calendar {
+				margin-top: 2px;
+
+				border: none;
+				@include color-rgba(box-shadow, mint, 0.5, 0 0 0 1px);
+
+				.cell {
+					border-radius: 2px;
+
+					transition: all $transition;
+
+					&.selected {
+						@include color(background, gold);
+					}
+
+					&:not(.blank):not(.disabled) {
+						&.day, &.year {
+							&:hover {
+								@include color(border, pinot, 1px solid);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/deep/ {
+		input, textarea, select {
+			display: block;
+			width: 100%;
+		}
+	}
+
+	.form-section {
+		&:not(:first-child) {
+			position: relative;
+
+			margin-top: 6rem;
+			padding-top: 6rem;
+
+			&::before {
+				content: '';
+
+				position: absolute;
+				top: 0;
+				left: -2.5rem;
+
+				width: calc(100% + 5rem);
+				height: 3px;
+
+				background: {
+					image: url('/assets/img/divider-dotted.svg');
+					position: center;
+					repeat: repeat-x;
+					size: 6px 3px;
+				}
+				opacity: 0.33;
+			}
+		}
+	}
+
+	// special fields
+
+	.file-field {
+		position: relative;
+
+		&.-with-file {
+			.image {
+				opacity: 1;
+				visibility: visible;
+
+				background: none;
+			}
+
+			label {
+				color: transparent;
+			}
+		}
+
+		input {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 2;
+
+			width: 100%;
+			height: 100%;
+
+			opacity: 0;
+			cursor: pointer;
+
+			@include hover {
+				+ label {
+					@include color(border-color, pinot);
+					@include color-rgba(background, pinot, 0.1);
+				}
+			}
+		}
+
+		label {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			width: 100%;
+
+			@include color-rgba(border, pinot, 0.2, 1px dashed);
+
+			font-weight: 700;
+			font-size: 2.5rem;
+
+			transition: all $transition;
+		}
+
+		.image {
+			position: relative;
+			z-index: 1;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 3rem;
+			width: 100%;
+			min-height: 20rem;
+
+			opacity: 0.05;
+			background: {
+				image: url('/assets/img/icon-image.svg');
+				size: 15rem 15rem;
+				position: center;
+				repeat: no-repeat;
+			}
+				
+
+			transition: all $transition;
+
+			img {
+				max-width: 100%;
+			}
+		}
+	}
+
+	.date-field {
+		.input-group {
+			position: relative;
+
+			&::after {
+				content: '';
+
+				position: absolute;
+				top: 0;
+				right: 1rem;
+
+				width: 2.5rem;
+				height: 5rem;
+
+				background: {
+					image: url('/assets/img/icon-calendar.svg');
+					position: center;
+					repeat: no-repeat;
+					size: 100% (2.5rem * 512 / 448);
+				}
+				opacity: 0.5;
+
+				pointer-events: none;
+			}
+
+			> * {
+				width: 100%;
+			}
+		}
+
+		/deep/ {
+			input {
+				padding-right: 5rem;
+			}
+		}
+	}
+
+	.line-items {
+		tbody {
+			tr {
+				border-bottom: 1px dotted #ccc;
+
+				&:hover {
+					.btn-remove-line-item {
+						.button-icon {
+							transform: translateY(0);
+
+							opacity: 1;
+						}
+					}
+				}
+			}
+		}
+
+		thead {
+			tr {
+				@include color-rgba(border-bottom, pinot, 0.33, 2px solid);
+			}
+		}
+		
+		tr {
+			border-collapse: collapse;
+		}
+
+		td, th {
+			width: (100% / 6);
+
+			&:first-child {
+				padding-left: 0;
+				width: 50%;
+			}
+
+			&:last-child {
+				padding-right: 0;
+
+				text-align: right;
+			}
+		}
+
+		th {
+			padding: 0.5rem 1rem;
+		}
+
+		td {
+			position: relative;
+
+			padding: 1.5rem 1rem;
+
+			&:last-child {
+				vertical-align: bottom;
+				padding: {
+					top: 0;
+					bottom: 0.5rem;
+				}
+			}
+		}
+
+		.btn-remove-line-item {
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translate(100%, -50%);
+
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			width: 6rem;
+			height: 100%;
+			padding: 0;
+
+			border: 0;
+			outline: 0;
+			appearance: none;
+			background: transparent;
+			cursor: pointer;
+
+			&:focus, &:hover {
+				.button-icon {
+					transform: translateY(0);
+
+					@include color(background, tomato);	
+					opacity: 1;
+				}
+			}
+
+			.button-icon {
+				transform: translateY(3px);
+				
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 4rem;
+				height: 4rem;
+
+				background: #bbb;
+				opacity: 0;
+				border-radius: 50%;
+
+				transition: all $transition;
+			}
+
+			.icon {
+				width: 50%;
+
+				/deep/ {
+					fill: white;
+				}
+			}
+		}
+	}
+
+	.btn-add-line-item {
+		margin-top: 3rem;
+	}
+
+	.amount {
+		/deep/ {
+			.dollars {
+				display: inline-block;
+
+				font-size: 3rem;
+
+				&::before {
+					content: '$';
+
+					transform: translateY(-1px);
+
+					display: inline-block;
+					margin-right: 0.1em;
+
+					font-family: $font-headline;
+					font-size: 2rem;
+				}
+			}
+
+			.cents {
+				display: inline-block;
+				margin-left: -0.3em;
+				opacity: 0.75;
+
+				font-size: 2rem;
+				letter-spacing: 0.01;
+			}
+		}
+	}
+
+	.invoice-total {
+		.row {
+			height: 5rem;
+		}
+
+		.line-item {
+			&:not(:first-child):not(.-with-input) {
+				margin-top: 3rem;
+			}
+		}
+
+		.label, .amount {
+			line-height: 1;
+		}
+
+		.label {
+			font-weight: 600;
+		}
+
+		input {
+			width: 100%;
+		}
+
+		select {
+			width: 7.5rem;
+			margin-right: 1rem;
+		}
+	}
+}

@@ -1,0 +1,209 @@
+html, body {
+	height: 100%;
+}
+
+html {
+	overflow-x: hidden;
+
+	font-size: 8px;
+}
+
+body {
+	background: #F4F4F4;
+
+	font-size: 2rem;
+}
+
+.money-please {
+	padding-top: 15rem;
+	padding-bottom: 3rem;
+
+	font-family: $font-body;
+
+	h1, h2, h3, h4 {
+		font-family: $font-headline;
+		font-weight: 900;
+	}
+
+	h1 {
+		font-size: 5rem;
+	}
+
+	.font-body {
+		font-family: $font-body;
+		font-weight: 400;
+	}
+
+	.font-headline {
+		font-family: $font-headline;
+		font-weight: 900;
+	}
+
+	a {
+		transition: all $transition;
+	}
+
+	.list {
+		margin: 0;
+		padding: 0;
+
+		list-style-type: none;
+	}
+
+	.page-tile {
+		padding: 4rem;
+
+		background: white;
+		@include color(border-top, pinot, 5px solid); 
+
+		&:not(:first-child) {
+			margin-top: 5rem;
+		}
+	}
+	
+	/deep/ {
+		input, select {
+			height: 5rem;
+
+			background: transparent;
+		}
+
+		input, textarea, select {
+			padding: 1rem;
+
+			border: 0;
+			border-radius: 2px;
+			@include color-rgba(box-shadow, pinot, 0.2, 0 0 0 1px);
+
+			transition: all $transition;
+
+			&:focus {
+				outline: 0;
+				border: 0;
+				@include color(box-shadow, mint, 0 0 0 2px);
+			}
+		}
+	}
+
+	.money-field {
+		.input-group {
+			position: relative;
+
+			&::before {
+				content: '$';
+
+				position: absolute;
+				top: 50%;
+				left: 1rem;
+				transform: translateY(-50%);
+
+				@include color(color, mint);
+
+				font-family: $font-headline;
+				font-weight: 700;
+			}
+
+			input {
+				padding-left: 3rem;
+			}
+		}
+	}
+
+	@each $key, $value in $color {
+		.color-#{$key} {
+			color: $value;
+		}
+	}
+
+	@media screen and (max-width: 767px) {
+		padding-top: 12.5rem;
+	}
+}
+
+.btn {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem 3rem;
+	min-height: 5rem;
+
+	border: 0;
+	
+	font-size: 2rem;
+	font-family: $font-headline;
+	font-weight: 700;
+
+	.icon {
+		height: 3rem;
+		width: auto;
+
+		opacity: 0.7;
+
+		+ * {
+			margin-left: 1.5rem;
+		}
+	}
+}
+
+.btn-default {
+	@include color(background, gold);
+	@include color(color, midnight);
+
+	.-show-hover &:hover {
+		@include color(color, midnight);
+		background: lighten(map-get($color, gold), 15);
+	}
+	.-show-focus &:focus {
+		box-shadow: 0 0 0 2px darken(map-get($color, gold), 15);
+	}
+}
+
+.btn-secondary {
+	@include color(background, pinot);
+	color: white;
+
+	.-show-hover &:hover {
+		background: darken(map-get($color, pinot), 10);
+	}
+	.-show-focus &:focus {
+		box-shadow: 0 0 0 2px lighten(map-get($color, pinot), 25);
+	}
+}
+
+.btn-warning {
+	@include color(background, tomato);
+	color: white;
+
+	.-show-hover &:hover {
+		background: darken(map-get($color, tomato), 10);
+		color: white;
+	}
+	.-show-focus &:focus {
+		box-shadow: 0 0 0 2px lighten(map-get($color, tomato), 25);
+	}
+
+	.icon {
+		/deep/ {
+			* {
+				fill: white;
+			}
+		}
+	}
+}
+
+.btn-sm {
+	padding: 0.5rem 2rem;
+	min-height: 4rem;
+
+	border-radius: 2rem;
+
+	font-size: 1.75rem;
+
+	.icon {
+		height: 2rem;
+
+		+ * {
+			margin-left: 0.75rem;
+		}
+	}
+}

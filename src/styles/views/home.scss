@@ -1,0 +1,52 @@
+.view-home {
+	h2 {
+		font-size: 2.5rem;
+	}
+
+	.headline-amount {
+		font-family: $font-headline;
+		font-size: 4rem;
+		font-weight: 900;
+
+		/deep/ {
+			.dollars {
+				margin-right: -0.2em;
+
+				&::before {
+					content: '$';
+
+					font-size: 0.8em;
+				}
+			}
+
+			.cents {
+				font-size: 0.8em;
+				font-weight: 700;
+			}
+		}
+	}
+
+	@media screen and (max-width: 767px) {
+		.dashboard-amount {
+			+ .dashboard-amount {
+				margin-top: 2rem;
+			}
+		}
+	}
+
+	@media screen and (min-width: 768px) {
+		.headline-amount {
+			font-size: 5rem;
+		}
+	}
+
+	@media screen and (min-width: 1024px) {
+		h2 {
+			font-size: 3rem;
+		}
+
+		.headline-amount {
+			font-size: 6rem;
+		}
+	}
+}

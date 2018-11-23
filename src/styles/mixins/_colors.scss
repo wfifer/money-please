@@ -1,0 +1,47 @@
+$color: (
+	midnight: #131828,
+	mint: #00aa75,
+	lime: #9ed841,
+	gold: #ffce00,
+	tomato: #ce1545,
+	pinot: #7a1560
+);
+
+:root {
+	@each $key, $value in $color {
+		--color--#{$key}: #{$value};
+		--color--#{$key}--rgb: #{red($value), green($value), blue($value)};
+	}
+}
+
+@mixin color($property, $key, $options: null) {
+	@if map-has-key($color, $key) {
+		#{$property}: $options map-get($color, $key);
+	}
+
+	@supports (color: var(--var)) {
+		#{$property}: $options var(--color--#{$key});
+	}
+}
+
+@mixin color-rgba($property, $key, $opacity, $options: null) {
+	@if map-has-key($color, $key) {
+		#{$property}: $options rgba(map-get($color, $key), $opacity);
+	}
+}
+
+@mixin color-box-shadow($key, $options) {
+	@if map-has-key($color, $key) {
+		box-shadow: $options map-get($color, $key);
+	}
+
+	@supports (color: var(--var)) {
+		box-shadow: $options var(--color--#{$key});
+	}
+}
+
+@mixin color-box-shadow-rgba($key, $opacity, $options) {
+	@if map-has-key($color, $key) {
+		box-shadow: $options rgba(map-get($color, $key), $opacity);
+	}
+}
