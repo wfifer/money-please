@@ -23,47 +23,6 @@
 				padding-right: 2rem;
 			}
 		}
-
-		/deep/ {
-			label {
-				height: 5rem;
-
-				line-height: 5rem;
-				font-weight: 600;
-			}
-
-			.vdp-datepicker__calendar {
-				margin-top: 2px;
-
-				border: none;
-				@include color-rgba(box-shadow, mint, 0.5, 0 0 0 1px);
-
-				.cell {
-					border-radius: 2px;
-
-					transition: all $transition;
-
-					&.selected {
-						@include color(background, gold);
-					}
-
-					&:not(.blank):not(.disabled) {
-						&.day, &.year {
-							&:hover {
-								@include color(border, pinot, 1px solid);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/deep/ {
-		input, textarea, select {
-			display: block;
-			width: 100%;
-		}
 	}
 
 	.form-section {
@@ -208,10 +167,28 @@
 				width: 100%;
 			}
 		}
+	}
 
-		/deep/ {
+	.money-field {
+		.input-group {
+			position: relative;
+
+			&::before {
+				content: '$';
+
+				position: absolute;
+				top: 50%;
+				left: 1rem;
+				transform: translateY(-50%);
+
+				@include color(color, mint);
+
+				font-family: $font-headline;
+				font-weight: 700;
+			}
+
 			input {
-				padding-right: 5rem;
+				padding-left: 3rem;
 			}
 		}
 	}
@@ -322,9 +299,61 @@
 
 			.icon {
 				width: 50%;
+			}
+		}
 
-				/deep/ {
-					fill: white;
+		@media screen and (max-width: 767px) {
+			display: block;
+
+			tr {
+				position: relative;
+
+				display: flex;
+				flex-wrap: wrap;
+			}
+
+			thead {
+				display: none;
+			}
+
+			td, th {
+				position: static;
+
+				width: 33%;
+
+				&:first-child {
+					width: 100%;
+				}
+
+				&:nth-child(2) {
+					margin-left: -1rem;
+				}
+
+				&:last-child {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-end;
+					justify-content: flex-end;
+					width: calc(33% + 1rem);
+					padding: 1.5rem 1rem;
+				}
+			}
+
+			label {
+				height: 5rem;
+			    line-height: 5rem;
+			    font-weight: 600;
+			}
+
+			.btn-remove-line-item {
+				top: 1rem;
+				right: 0;
+				transform: none;
+
+				height: 4rem;
+
+				.button-icon {
+					opacity: 1 !important;
 				}
 			}
 		}
@@ -332,37 +361,6 @@
 
 	.btn-add-line-item {
 		margin-top: 3rem;
-	}
-
-	.amount {
-		/deep/ {
-			.dollars {
-				display: inline-block;
-
-				font-size: 3rem;
-
-				&::before {
-					content: '$';
-
-					transform: translateY(-1px);
-
-					display: inline-block;
-					margin-right: 0.1em;
-
-					font-family: $font-headline;
-					font-size: 2rem;
-				}
-			}
-
-			.cents {
-				display: inline-block;
-				margin-left: -0.3em;
-				opacity: 0.75;
-
-				font-size: 2rem;
-				letter-spacing: 0.01;
-			}
-		}
 	}
 
 	.invoice-total {

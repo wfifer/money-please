@@ -61,27 +61,26 @@ body {
 		}
 	}
 	
-	/deep/ {
-		input, select {
-			height: 5rem;
+	input, select {
+		height: 5rem;
 
-			background: transparent;
-		}
+		background: transparent;
+	}
 
-		input, textarea, select {
-			padding: 1rem;
+	input, textarea, select {
+		padding: 1rem;
 
+		-webkit-appearance: none;
+		border: 0;
+		border-radius: 2px;
+		@include color-rgba(box-shadow, pinot, 0.2, 0 0 0 1px);
+
+		transition: all $transition;
+
+		&:focus {
+			outline: 0;
 			border: 0;
-			border-radius: 2px;
-			@include color-rgba(box-shadow, pinot, 0.2, 0 0 0 1px);
-
-			transition: all $transition;
-
-			&:focus {
-				outline: 0;
-				border: 0;
-				@include color(box-shadow, mint, 0 0 0 2px);
-			}
+			@include color(box-shadow, mint, 0 0 0 2px);
 		}
 	}
 
@@ -183,10 +182,8 @@ body {
 	}
 
 	.icon {
-		/deep/ {
-			* {
-				fill: white;
-			}
+		* {
+			fill: white;
 		}
 	}
 }

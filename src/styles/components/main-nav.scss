@@ -20,18 +20,6 @@
 		width: 25rem;
 	}
 
-	.logo, .logo-mark {
-		/deep/ {
-			.text {
-				fill: white;
-			}
-
-			.mark {
-				@include color(fill, gold);
-			}
-		}
-	}
-
 	.nav-list {
 		display: flex;
 		align-items: center;

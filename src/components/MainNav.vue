@@ -51,3 +51,15 @@ export default {
 </script>
 
 <style src="@/styles/components/main-nav.scss" lang="scss" scoped></style>
+
+<style lang="scss">
+	.logo, .logo-mark {
+		.text {
+			fill: white;
+		}
+
+		.mark {
+			@include color(fill, gold);
+		}
+	}
+</style>

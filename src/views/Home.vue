@@ -60,3 +60,22 @@ export default {
 </script>
 
 <style src="@/styles/views/home.scss" lang="scss" scoped></style>
+
+<style lang="scss">
+	.headline-amount {
+		.dollars {
+			margin-right: -0.2em;
+
+			&::before {
+				content: '$';
+
+				font-size: 0.8em;
+			}
+		}
+
+		.cents {
+			font-size: 0.8em;
+			font-weight: 700;
+		}
+	}
+</style>

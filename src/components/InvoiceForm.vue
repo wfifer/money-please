@@ -62,6 +62,8 @@
 						<tr v-for="(item, index) in invoice.lineItems" :key="`line-item-${ index }`">
 							<td v-for="(column) in lineItemColumns.slice(0, lineItemColumns.length - 1)" :key="`line-item-${ index }-${ column.name }`">
 								<div class="form-field" :class="['rate', 'total'].includes(column.name) ? 'money-field' : null">
+									<label class="d-md-none">{{ column.title }}</label>
+
 									<div class="input-group">
 										<input :name="column.name" :value="item[column.name]" @input="updateColumn($event, index)" :type="column.type" :placeholder="column.hasOwnProperty('placeholder') ? column.placeholder : null">
 									</div>
@@ -69,6 +71,8 @@
 							</td>
 
 							<td class="total">
+								<label class="d-md-none">Total</label>
+
 								<div class="amount" v-html="dollarsAndCents(item.total)"></div>
 
 								<button type="button" class="btn-remove-line-item" v-if="invoice.lineItems.length > 1" @click="removeLineItem(index)">
@@ -278,3 +282,108 @@ export default {
 </script>
 
 <style src="@/styles/components/invoice-form.scss" lang="scss" scoped></style>
+
+<!-- Having issues with sass-loader processing /deep/ in Vue CLI 3 build so pulling these out for now -->
+
+<style lang="scss">
+	.form-field {
+		label {
+			height: 5rem;
+
+			line-height: 5rem;
+			font-weight: 600;
+		}
+
+		.vdp-datepicker__calendar {
+			margin-top: 2px;
+
+			border: none;
+			@include color-rgba(box-shadow, mint, 0.5, 0 0 0 1px);
+
+			.cell {
+				border-radius: 2px;
+
+				transition: all $transition;
+
+				&.selected {
+					@include color(background, gold);
+				}
+
+				&:not(.blank):not(.disabled) {
+					&.day, &.year {
+						&:hover {
+							@include color(border, pinot, 1px solid);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	input, select {
+		height: 5rem;
+
+		background: transparent;
+	}
+
+	input, textarea, select {
+		display: block;
+		padding: 1rem;
+		width: 100%;
+
+		border: 0;
+		border-radius: 2px;
+		@include color-rgba(box-shadow, pinot, 0.2, 0 0 0 1px);
+
+		transition: all $transition;
+
+		&:focus {
+			outline: 0;
+			border: 0;
+			@include color(box-shadow, mint, 0 0 0 2px);
+		}
+	}
+
+	.date-field {
+		input {
+			padding-right: 5rem;
+		}
+	}
+
+	.line-items {
+		.btn-remove-line-item {
+			.icon {
+				fill: white;
+			}
+		}
+	}
+
+	.amount {
+		.dollars {
+			display: inline-block;
+
+			font-size: 3rem;
+
+			&::before {
+				content: '$';
+
+				transform: translateY(-1px);
+
+				display: inline-block;
+				margin-right: 0.1em;
+
+				font-family: $font-headline;
+				font-size: 2rem;
+			}
+		}
+
+		.cents {
+			display: inline-block;
+			margin-left: -0.3em;
+			opacity: 0.75;
+
+			font-size: 2rem;
+			letter-spacing: 0.01;
+		}
+	}
+</style>
